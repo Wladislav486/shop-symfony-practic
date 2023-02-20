@@ -27,6 +27,8 @@ services:
       - "5432:5432"
     volumes:
       - ./docker/db/:/var/lib/postgresql/data
+    command: >
+      bash -c "cd /var/lib/postgresql/ && chmod 777 -R data/"
     networks:
       - shoplist
 networks:

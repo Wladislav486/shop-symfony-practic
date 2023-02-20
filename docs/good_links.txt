@@ -1,0 +1,11 @@
+Установка Docker на виндовс
+https://youtu.be/gAYPxmtbadc
+
+Курс по Docker
+https://youtube.com/playlist?list=PLU2ftbIeotGoGFC_2lj-OplT_cItXfu48
+
+Документация Dockerfile
+https://docs.docker.com/engine/reference/builder/
+
+Документация docker-compose
+https://docs.docker.com/compose/gettingstarted/

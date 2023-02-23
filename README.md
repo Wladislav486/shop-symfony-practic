@@ -3,7 +3,7 @@
 ## Первый запуск
 1. Установить докер на windows: https://youtu.be/gAYPxmtbadc
 2. Установить настройки среды: cp .env.test .env && cp app/.env.test app/.env
-3. Создать образ: docker-compose build up
+3. Создать образ: docker-compose build app
 4. Запустить приложение: docker-compose up -d
 5. Зайти в контейнер в интерактивном режиме: docker exec -it container_name bash
 6. Установить зависимости: sudo composer install

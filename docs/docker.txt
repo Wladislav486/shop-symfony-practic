@@ -1,9 +1,0 @@
-1 создать образ по текущему Dockerfile
-- зайти в директорию Dockerfile
-- запустить команду в консоле
-docker build -t wladislav486/ubuntu-shop-symfony:v1 ./
-docker commit nostalgic_kirch wladislav486/ubuntu-shop-symfony:v1
-docker push wladislav486/ubuntu-shop-symfony:v1
-
-
-

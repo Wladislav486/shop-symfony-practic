@@ -29,6 +29,8 @@ symfony composer require symfonycasts/verify-email-bundle=1.5
 symfony console make:auth
 - отредактировали названия маршрутов по коду
 
+025 Функция _Запомнить меня_
+Позволяет задать время авторизации
 
 
 

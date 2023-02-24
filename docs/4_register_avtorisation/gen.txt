@@ -1,0 +1,24 @@
+
+020 Страница регистрации
+
+Создаём систему авторизации/регистрации через стандартный фун-ал symfony
+- создаём сущность пользователь
+symfony console make:user
+- создаём миграцию по моделе
+symfony console make:migration
+- выполняем миграцию
+symfony console doctrine:migrations:migrate
+- создаём фун-ал регистрации/авторизации
+symfony console make:registration-form
+- добавляем зависимость для данного фун-ала
+symfony composer require symfonycasts/verify-email-bundle=1.5
+
+
+
+
+
+
+
+
+
+

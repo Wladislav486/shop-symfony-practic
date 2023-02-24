@@ -14,6 +14,12 @@ symfony console make:registration-form
 symfony composer require symfonycasts/verify-email-bundle=1.5
 
 
+022 Mailtrap. Отлавливаем письма
+- настроем почтовый сервер
+- сделаем шаблон для флеш сообщений
+- сделаем редирект после аутонтификации на главную
+- выведем в общем шаблоне флеш сообщения
+
 
 
 

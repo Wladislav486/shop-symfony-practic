@@ -27,10 +27,15 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/registeration", name="main_registration")
+     * @Route("/registration", name="main_registration")
      */
     public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('main_profile_index');
+        }
+
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

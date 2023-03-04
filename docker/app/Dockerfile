@@ -1,3 +1,5 @@
+# https://github.com/Wladislav486/coorse-symfony-image
+# https://hub.docker.com/repository/docker/wladislav486/ubuntu-shop-symfony/general
 FROM wladislav486/ubuntu-shop-symfony:v1
 
 ## user

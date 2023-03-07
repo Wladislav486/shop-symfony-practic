@@ -53,9 +53,20 @@ class EditProductFormType extends AbstractType
                     'style' => 'overflow: hidden;'
                 ]
             ])
+
+            ->add('newImage', Type\FileType::class, [
+                'label' => 'Choose new image',
+                'required' => false,
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'form-control-file',
+                ]
+            ])
+
+
             ->add('isPublished', Type\CheckboxType::class, [
                 'label' => 'Is published',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-check-input',
                     'style' => 'overflow: hidden;'
@@ -66,7 +77,7 @@ class EditProductFormType extends AbstractType
             ])
             ->add('isDeleted', Type\CheckboxType::class, [
                 'label' => 'Is deleted',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-check-input',
                     'style' => 'overflow: hidden;'

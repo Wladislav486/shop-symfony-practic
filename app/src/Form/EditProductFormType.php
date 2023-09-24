@@ -57,7 +57,7 @@ class EditProductFormType extends AbstractType
             ->add('newImage', Type\FileType::class, [
                 'label' => 'Choose new image',
                 'required' => false,
-                'mapped' => false,
+                'mapped' => false, // в сущности данного поля нет
                 'attr' => [
                     'class' => 'form-control-file',
                 ]

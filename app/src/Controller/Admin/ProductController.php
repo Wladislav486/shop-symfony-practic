@@ -34,16 +34,15 @@ class ProductController extends AbstractController
      * @Route("/edit/{id}", name="edit")
      * @Route("/add", name="add")
      */
-    public function edit(Request $request,ProductFormHandler $productFormHandler, Product $product = null): Response
+    public function edit(Request $request, ProductFormHandler $productFormHandler, Product $product = null): Response
     {
         $form = $this->createForm(EditProductFormType::class, $product);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $product = $productFormHandler->processEditForm($product, $form);
             return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
         }
-
 
 
         return $this->render('admin/product/edit.html.twig', [

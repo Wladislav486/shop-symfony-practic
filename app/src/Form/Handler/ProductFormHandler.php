@@ -3,6 +3,7 @@
 namespace App\Form\Handler;
 
 use App\Entity\Product;
+use App\Utils\File\FileSaver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Form;
 
@@ -13,9 +14,15 @@ class ProductFormHandler
      */
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var FileSaver
+     */
+    private $fileSaver;
+
+    public function __construct(EntityManagerInterface $entityManager, FileSaver $fileSaver)
     {
         $this->entityManager = $entityManager;
+        $this->fileSaver = $fileSaver;
     }
 
 
@@ -23,7 +30,13 @@ class ProductFormHandler
     {
         $this->entityManager->persist($product);
 
-        dd($product, $form->get('newImage')->getData());
+        $newImageFile = $form->get('newImage')->getData();
+        $tempImageFileName = $newImageFile
+            ? $this->fileSaver->saveUploadedFileIntoTemp($newImageFile)
+            : null;
+
+        dd($tempImageFileName);
+
         $this->entityManager->flush();
         return $product;
     }

@@ -17,6 +17,15 @@
    `symfony server:ca:install`
 8. Запустить сервер:  
    `symfony serve`
+9. Установить миграции:  
+   `php bin/console doctrine:migrations:migrate`
+10. Проверьте наличие последовательности, если нет добавьте её:  
+   `SELECT * FROM information_schema.sequences WHERE sequence_name = 'user_id_seq';`  
+   `CREATE SEQUENCE user_id_seq;`
+11. Через консоль создаём пользователя:  
+    `php bin/console app:add-user`  
+   > Для того чтобы попасть в административную панель нужно Is admin = 1 проставить
+
 
 ## Дальнейшая работа
 1. Запустить приложение:

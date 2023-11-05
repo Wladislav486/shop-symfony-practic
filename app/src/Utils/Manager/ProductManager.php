@@ -20,11 +20,17 @@ class ProductManager
      */
     private string $productImagesDir;
 
-    public function __construct(EntityManagerInterface $entityManager, string $productImagesDir)
+    /**
+     * @var ProductImageManager
+     */
+    private ProductImageManager $productImageManager;
+
+    public function __construct(EntityManagerInterface $entityManager, ProductImageManager $productImageManager, string $productImagesDir)
     {
 
         $this->entityManager = $entityManager;
         $this->productImagesDir = $productImagesDir;
+        $this->productImageManager = $productImageManager;
     }
 
     /**
@@ -41,11 +47,20 @@ class ProductManager
         //
     }
 
+    /**
+     * @param Product $product
+     * @return string
+     */
     public function getProductImagesDir(Product $product): string
     {
         return sprintf('%s/%s', $this->productImagesDir, $product->getId());
     }
 
+    /**
+     * @param Product $product
+     * @param string|null $tempImagesFileName
+     * @return Product
+     */
     public function updateProductImages(Product $product, string $tempImagesFileName = null): Product
     {
         if (!$tempImagesFileName) {
@@ -55,11 +70,16 @@ class ProductManager
         $productDir = $this->getProductImagesDir($product);
 
         $productImage = $this->productImageManager->saveImageForProduct($productDir, $tempImagesFileName);
+
         $product->addProductImage($productImage);
 
         return $product;
     }
 
+    /**
+     * @param Product $product
+     * @return void
+     */
     public function save(Product $product)
     {
         $this->entityManager->persist($product);

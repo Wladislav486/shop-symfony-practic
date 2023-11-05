@@ -8,6 +8,7 @@ use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,7 @@ class ProductController extends AbstractController
      */
     public function edit(Request $request, ProductFormHandler $productFormHandler, Product $product = null): Response
     {
+        /** @var Form $form */
         $form = $this->createForm(EditProductFormType::class, $product);
         $form->handleRequest($request);
 

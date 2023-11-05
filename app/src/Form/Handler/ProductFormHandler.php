@@ -13,7 +13,7 @@ class ProductFormHandler
     /**
      * @var FileSaver
      */
-    private $fileSaver;
+    private FileSaver $fileSaver;
 
     /**
      * @var ProductManager
@@ -27,16 +27,21 @@ class ProductFormHandler
     }
 
 
+    /**
+     * @param Product $product
+     * @param Form $form
+     * @return Product
+     */
     public function processEditForm(Product $product, Form $form): Product
     {
-        $this->productManager->save($product);
-
         $newImageFile = $form->get('newImage')->getData();
+
         $tempImageFileName = $newImageFile
             ? $this->fileSaver->saveUploadedFileIntoTemp($newImageFile)
             : null;
 
         $this->productManager->updateProductImages($product, $tempImageFileName);
+        $this->productManager->save($product);
 
         return $product;
     }

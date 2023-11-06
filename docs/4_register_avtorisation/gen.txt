@@ -4,7 +4,7 @@
 Создаём систему авторизации/регистрации через стандартный фун-ал symfony
 - создаём сущность пользователь
 symfony console make:user
-- создаём миграцию по моделе
+- создаём миграцию по сущности
 symfony console make:migration
 - выполняем миграцию
 symfony console doctrine:migrations:migrate

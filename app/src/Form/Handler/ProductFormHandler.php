@@ -3,6 +3,7 @@
 namespace App\Form\Handler;
 
 use App\Entity\Product;
+use App\Form\Dto\EditProductModel;
 use App\Utils\File\FileSaver;
 use App\Utils\Manager\ProductManager;
 use Symfony\Component\Form\Form;
@@ -28,24 +29,34 @@ class ProductFormHandler
 
 
     /**
-     * @param Product $product
+     * @param EditProductModel $editProductModel
      * @param Form $form
      * @return Product
      */
-    public function processEditForm(Product $product, Form $form): Product
+    public function processEditForm(EditProductModel $editProductModel, Form $form): Product
     {
+        $product = new Product();
+
+        if (isset($editProductModel->id) && $editProductModel->id) {
+            $product = $this->productManager->find($editProductModel->id);
+        }
+
+        $product->setTitle($editProductModel->title);
+        $product->setPrice($editProductModel->price);
+        $product->setQuantity($editProductModel->quantity);
+        $product->setDescription($editProductModel->description);
+        $product->setIsPublished($editProductModel->isPublished);
+        $product->setIsDeleted($editProductModel->isDeleted);
+
+        $this->productManager->save($product);
+
         $newImageFile = $form->get('newImage')->getData();
 
         $tempImageFileName = $newImageFile
             ? $this->fileSaver->saveUploadedFileIntoTemp($newImageFile)
             : null;
 
-        /**
-         * Создаём ид продукта, чтобы сформировать корректный путь для изображения при создании продукта
-         */
-        if (!$product->getId()) {
-            $this->productManager->save($product);
-        }
+
         $this->productManager->updateProductImages($product, $tempImageFileName);
         $this->productManager->save($product);
 

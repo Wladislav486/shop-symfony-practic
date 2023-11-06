@@ -39,7 +39,6 @@ class ProductController extends AbstractController
      */
     public function edit(Request $request, ProductFormHandler $productFormHandler, Product $product = null): Response
     {
-
         $editProductModel = EditProductModel::makeFromProduct($product);
 
         /** @var Form $form */
@@ -47,13 +46,13 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product = $productFormHandler->processEditForm($product, $form);
+            $product = $productFormHandler->processEditForm($editProductModel, $form);
             return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
         }
 
 
         return $this->render('admin/product/edit.html.twig', [
-            'images' => $product->getProductImages() ? $product->getProductImages()->getValues() : [],
+            'images' => $product && $product->getProductImages() ? $product->getProductImages()->getValues() : [],
             'product' => $product,
             'form' => $form->createView()
         ]);

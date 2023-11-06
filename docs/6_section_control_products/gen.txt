@@ -80,3 +80,17 @@ sudo composer require imagine/imagine:1.2
 1 Установим расширение композер для работы с валютой
 composer require twig/intl-extra
 2 Воспользовались фун-алом расширения в шаблоне списка продуктов list.html.twig
+
+
+050 Используем Sluggable
+1 Сгенерировали поле Product slug из консоли
+symfony console make:entity Product
+2 Создали миграцию
+symfony console make:migration
+3 Добавили поле в таблицу
+symfony console doctrine:migrations:migrate
+4 Установим расширение composer для формирования slug
+sudo composer require stof/doctrine-extensions-bundle ^1.6.*
+- версию взял из видео
+- файл с настройками нужно пересоздать из локалки, прав на редактирование нехватает если он создан автоматически из контейнера
+5 Добавим анотацию в классе модели полю slug

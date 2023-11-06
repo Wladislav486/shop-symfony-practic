@@ -27,3 +27,9 @@
 ### [PostgreSQL] Создать расширение для uuid:  
 
 `CREATE EXTENSION "uuid-ossp";`
+
+
+
+### [PostgreSQL] Просмотреть информацию о столбцах таблицы:
+
+`SELECT * FROM information_schema.columns WHERE table_name = 'product';`

@@ -40,6 +40,12 @@ class ProductFormHandler
             ? $this->fileSaver->saveUploadedFileIntoTemp($newImageFile)
             : null;
 
+        /**
+         * Создаём ид продукта, чтобы сформировать корректный путь для изображения при создании продукта
+         */
+        if (!$product->getId()) {
+            $this->productManager->save($product);
+        }
         $this->productManager->updateProductImages($product, $tempImageFileName);
         $this->productManager->save($product);
 

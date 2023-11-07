@@ -34,10 +34,6 @@
                                 {{ category.slug }}
                             </td>
                             <td>
-                                <i class="fas fa-check fa-sm"
-                                   style="color: {% if product.isPublished %}green{% else %}lightgray{% endif %};"></i>
-                            </td>
-                            <td>
                                 <a href="{{ path('admin_category_edit', {'id': category.id}) }}"
                                    class="btn btn-outline-info">Edit</a>
                             </td>

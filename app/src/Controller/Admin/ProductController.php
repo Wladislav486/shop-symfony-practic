@@ -25,7 +25,6 @@ class ProductController extends AbstractController
      */
     public function list(ProductRepository $productRepository): Response
     {
-
         $products = $productRepository->findBy(['isDeleted' => false], ['id' => 'DESC'], 50);
         return $this->render('admin/product/list.html.twig', [
             'products' => $products

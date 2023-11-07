@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Form\EditCategoryFormType;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +33,21 @@ class CategoryController extends AbstractController
      */
     public function edit(Request $request, Category $category = null): Response
     {
+        if (!$category) {
+            $category = new Category();
+        }
 
+        $form = $this->createForm(EditCategoryFormType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        }
+
+        return $this->render('admin/category/edit.html.twig', [
+            'category' => $category,
+            'form' => $form->createView()
+        ]);
     }
 
     /**

@@ -14,11 +14,13 @@ class CategoryController extends AbstractController
      * @Route("/category/{slug}", name="main_category_show")
      * @throws NotFoundException
      */
-    public function index(Category $category): Response
+    public function show(Category $category): Response
     {
-        if(!$category){
+        if (!$category) {
             throw new NotFoundException();
         }
+
+        dd($category);
 
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',

@@ -1,35 +1,31 @@
-<div class="container-fluid">
-    <button class="mobile-menu-toggler" id="mobile_menu_toggler">
-        <i class="fas fa-bars"></i>
+<div class="mobile-menu-container" id="mobile_menu_container">
+    <button class="mobile-menu-close-btn" id="mobile_menu_close_btn">
+        <i class="fas fa-times"></i>
     </button>
-
-    <a href="#" class="logotype">
-        <img src="{{ asset('build/images/icons/logo_366x79.svg') }}" alt="RankedChoice Logotype">
-    </a>
-    <nav class="main-nav">
-        <ul class="menu">
+    <nav class="mobile-nav">
+        <ul class="mobile-menu">
             <li class="menu-item">
-                <a href="#">
+                <a href="{{ path('main_category_show', {'slug': 'jeans'}) }}">
                     <div>Jeans</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
+                <a href="{{ path('main_category_show', {'slug': 'hats'}) }}">
                     <div>Hats</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
+                <a href="{{ path('main_category_show', {'slug': 'jackets'}) }}">
                     <div>Jackets</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
+                <a href="{{ path('main_category_show', {'slug': 'dresses'}) }}">
                     <div>Dresses</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
+                <a href="{{ path('main_category_show', {'slug': 'sneakers'}) }}">
                     <div>Sneakers</div>
                 </a>
             </li>

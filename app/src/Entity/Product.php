@@ -94,7 +94,7 @@ class Product
 
     public function getUuid(): ?string
     {
-        return $this->id;
+        return $this->uuid;
     }
 
     public function getTitle(): ?string

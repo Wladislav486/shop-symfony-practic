@@ -19,11 +19,11 @@ class CategoryController extends AbstractController
         if (!$category) {
             throw new NotFoundException();
         }
+        $products = $category->getProducts()->getValues();
 
-        dd($category);
-
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
+        return $this->render('main/category/show.html.twig', [
+            'category' => $category,
+            'products' => $products
         ]);
     }
 }

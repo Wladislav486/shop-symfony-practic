@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
 use App\Form\Dto\EditCategoryModel;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type;
 
 class EditCategoryFormType extends AbstractType
 {

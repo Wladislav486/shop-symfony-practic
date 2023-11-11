@@ -23,7 +23,7 @@ class EditCategoryModel
      * @param Category|null $category
      * @return EditCategoryModel
      */
-    public static function makeFromProduct(?Category $category): EditCategoryModel
+    public static function makeFromCategory(?Category $category): EditCategoryModel
     {
         $model = new self();
         if (!$category) {

@@ -16,7 +16,7 @@ class CategoryManager extends AbstractBaseManager
      */
     public function getRepository(): ObjectRepository
     {
-        return $this->entityManager->getRepository(Product::class);
+        return $this->entityManager->getRepository(Category::class);
     }
 
     /**

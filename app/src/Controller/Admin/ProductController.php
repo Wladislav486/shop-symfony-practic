@@ -3,12 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Form\Admin\EditProductFormType;
 use App\Form\Dto\EditProductModel;
-use App\Form\EditProductFormType;
 use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use App\Utils\Manager\ProductManager;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +54,6 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('warning', 'Something went wrong. Please check your form!');
         }
-
 
         return $this->render('admin/product/edit.html.twig', [
             'images' => $product && $product->getProductImages() ? $product->getProductImages()->getValues() : [],

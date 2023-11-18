@@ -2,31 +2,30 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Category;
-use App\Form\Admin\EditCategoryFormType;
-use App\Form\Dto\EditCategoryModel;
-use App\Form\Handler\CategoryFormHandler;
-use App\Repository\CategoryRepository;
-use App\Utils\Manager\CategoryManager;
+use App\Entity\Order;
+use App\Entity\StaticStorage\OrderStaticStorage;
+use App\Repository\OrderRepository;
+use App\Utils\Manager\OrderManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/category", name="admin_category_")
+ * @Route("/admin/order", name="admin_order_")
  */
-class CategoryController extends AbstractController
+class OrderController extends AbstractController
 {
     /**
      * @Route("/list", name="list")
      */
-    public function list(CategoryRepository $categoryRepository): Response
+    public function list(OrderRepository $orderRepository): Response
     {
-        $categories = $categoryRepository->findBy(['isDeleted' => false], ['id' => 'DESC'], 50);
+        $orders = $orderRepository->findBy(['isDeleted' => false], ['id' => 'DESC'], 50);
 
-        return $this->render('admin/category/list.html.twig', [
-            'categories' => $categories,
+        return $this->render('admin/order/list.html.twig', [
+            'orders' => $orders,
+            'orderStatusChoices' => OrderStaticStorage::getOrderStatusChoices()
         ]);
     }
 
@@ -34,9 +33,9 @@ class CategoryController extends AbstractController
      * @Route("/edit/{id}", name="edit")
      * @Route("/add", name="add")
      */
-    public function edit(Request $request, CategoryFormHandler $categoryFormHandler, Category $category = null): Response
+    public function edit(Request $request, Order $order = null): Response
     {
-        $editCategoryModel = EditCategoryModel::makeFromCategory($category);
+/*        $editCategoryModel = EditCategoryModel::makeFromCategory($category);
 
         $form = $this->createForm(EditCategoryFormType::class, $editCategoryModel);
         $form->handleRequest($request);
@@ -51,7 +50,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('warning', 'Something went wrong. Please check your form!');
-        }
+        }*/
 
         return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
@@ -62,11 +61,11 @@ class CategoryController extends AbstractController
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete(Category $category, CategoryManager $categoryManager): Response
+    public function delete(Order $order, OrderManager $orderManager): Response
     {
-        $categoryManager->remove($category);
+        $orderManager->remove($order);
 
-        $this->addFlash('warning', 'The category was successfully deleted!');
-        return $this->redirectToRoute('admin_category_list');
+        $this->addFlash('warning', 'The order was successfully deleted!');
+        return $this->redirectToRoute('admin_order_list');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Order;
 use App\Entity\StaticStorage\OrderStaticStorage;
 use App\Form\Admin\EditOrderFormType;
+use App\Form\Handler\OrderFormHandler;
 use App\Repository\OrderRepository;
 use App\Utils\Manager\OrderManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,21 +35,18 @@ class OrderController extends AbstractController
      * @Route("/edit/{id}", name="edit")
      * @Route("/add", name="add")
      */
-    public function edit(Request $request, Order $order = null): Response
+    public function edit(Request $request, OrderFormHandler $orderFormHandler, Order $order = null): Response
     {
-
         if (!$order) {
             $order = new Order();
         }
-
 
         $form = $this->createForm(EditOrderFormType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dd($order);
-            //$category = $categoryFormHandler->processEditForm($editCategoryModel);
+            $order = $orderFormHandler->processEditForm($order);
 
             $this->addFlash('success', 'Your changes were saved!');
 

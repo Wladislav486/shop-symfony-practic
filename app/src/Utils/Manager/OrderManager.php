@@ -77,9 +77,19 @@ class OrderManager extends AbstractBaseManager
 
         $this->entityManager->persist($order);
         $this->entityManager->flush();
-        $this->cartManager->remove($cart);
 
-        dd($order);
+        $this->cartManager->remove($cart);
+    }
+
+    /**
+     * @param Order $entity
+     * @return void
+     */
+    public function save(object $entity)
+    {
+        $entity->setUpdatedAt(new DateTimeImmutable());
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
     }
 
     /**

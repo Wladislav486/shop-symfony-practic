@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\User;
 use App\Form\Admin\EditCategoryFormType;
+use App\Form\Admin\EditUserFormType;
 use App\Form\Dto\EditCategoryModel;
 use App\Form\Handler\CategoryFormHandler;
 use App\Repository\CategoryRepository;
@@ -35,29 +37,33 @@ class UserController extends AbstractController
      * @Route("/edit/{id}", name="edit")
      * @Route("/add", name="add")
      */
-    public function edit(Request $request, CategoryFormHandler $categoryFormHandler, Category $category = null): Response
+    public function edit(Request $request, User $user = null): Response
     {
-        /*       $editCategoryModel = EditCategoryModel::makeFromCategory($category);
+        if (!$user) {
+            $user = new User();
+        }
 
-               $form = $this->createForm(EditCategoryFormType::class, $editCategoryModel);
-               $form->handleRequest($request);
+        $form = $this->createForm(EditUserFormType::class, $user);
+        $form->handleRequest($request);
 
-               if ($form->isSubmitted() && $form->isValid()) {
-                   $category = $categoryFormHandler->processEditForm($editCategoryModel);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-                   $this->addFlash('success', 'Your changes were saved!');
+            dd($user);
+            $category = $categoryFormHandler->processEditForm($editCategoryModel);
 
-                   return $this->redirectToRoute('admin_category_edit', ['id' => $category->getId()]);
-               }
+            $this->addFlash('success', 'Your changes were saved!');
 
-               if ($form->isSubmitted() && !$form->isValid()) {
-                   $this->addFlash('warning', 'Something went wrong. Please check your form!');
-               }
+            return $this->redirectToRoute('admin_user_edit', ['id' => $user->getId()]);
+        }
 
-               return $this->render('admin/category/edit.html.twig', [
-                   'category' => $category,
-                   'form' => $form->createView()
-               ]);*/
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('warning', 'Something went wrong. Please check your form!');
+        }
+
+        return $this->render('admin/user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
     }
 
     /**
@@ -65,9 +71,9 @@ class UserController extends AbstractController
      */
     public function delete(Category $category, CategoryManager $categoryManager): Response
     {
- /*       $categoryManager->remove($category);
+        /*       $categoryManager->remove($category);
 
-        $this->addFlash('warning', 'The category was successfully deleted!');*/
+               $this->addFlash('warning', 'The category was successfully deleted!');*/
         return $this->redirectToRoute('admin_category_list');
     }
 }

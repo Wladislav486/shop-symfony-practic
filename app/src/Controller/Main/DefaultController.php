@@ -14,8 +14,6 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $productList = $entityManager->getRepository(Product::class)->findAll();
         return $this->render('main/default/index.html.twig', []);
     }
 

@@ -8,6 +8,7 @@ use App\Form\Admin\EditCategoryFormType;
 use App\Form\Admin\EditUserFormType;
 use App\Form\Dto\EditCategoryModel;
 use App\Form\Handler\CategoryFormHandler;
+use App\Form\Handler\UserFormHandler;
 use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use App\Utils\Manager\CategoryManager;
@@ -37,7 +38,7 @@ class UserController extends AbstractController
      * @Route("/edit/{id}", name="edit")
      * @Route("/add", name="add")
      */
-    public function edit(Request $request, User $user = null): Response
+    public function edit(Request $request, UserFormHandler $userFormHandler, User $user = null): Response
     {
         if (!$user) {
             $user = new User();
@@ -48,9 +49,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dd($user);
-            $category = $categoryFormHandler->processEditForm($editCategoryModel);
-
+            $user = $userFormHandler->processEditForm($form);
             $this->addFlash('success', 'Your changes were saved!');
 
             return $this->redirectToRoute('admin_user_edit', ['id' => $user->getId()]);

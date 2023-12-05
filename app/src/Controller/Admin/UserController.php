@@ -8,6 +8,7 @@ use App\Form\Admin\EditUserFormType;
 use App\Form\Handler\UserFormHandler;
 use App\Repository\UserRepository;
 use App\Utils\Manager\CategoryManager;
+use App\Utils\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,11 +65,11 @@ class UserController extends AbstractController
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete(Category $category, CategoryManager $categoryManager): Response
+    public function delete(User $user, UserManager $userManager): Response
     {
-        /*       $categoryManager->remove($category);
+        $userManager->remove($user);
+        $this->addFlash('warning', 'The user was successfully deleted!');
 
-               $this->addFlash('warning', 'The category was successfully deleted!');*/
-        return $this->redirectToRoute('admin_category_list');
+        return $this->redirectToRoute('admin_user_list');
     }
 }

@@ -16,6 +16,14 @@ class EditUserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('newEmail', TextType::class, [
+                'label' => 'Email',
+                'required' => false,
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('plainPassword', TextType::class, [
                 'label' => 'New password',
                 'required' => false,
@@ -70,8 +78,7 @@ class EditUserFormType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-check-label'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

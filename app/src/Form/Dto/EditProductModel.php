@@ -44,9 +44,9 @@ class EditProductModel
     public int $quantity;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public string $description;
+    public ?string $description;
 
     /**
      * @Assert\NotBlank(message="Please select a category")

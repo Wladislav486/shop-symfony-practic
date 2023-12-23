@@ -43,7 +43,7 @@
    `symfony server:ca:install`
 4. Запустить сервер:  
    `symfony serve`
-5. Если необходимо работать с файлами бд то необходимо поменять права на доступ к папке /var/lib/postgresql/data  
+5. Если необходимо работать с файлами бд, то необходимо поменять права на доступ к папке /var/lib/postgresql/data  
    `docker-compose exec db chmod 777 -R /var/lib/postgresql/data`
 
 ## Синтаксис файла README.md
@@ -55,7 +55,7 @@
 1. Создал файловую структуру
 2. Создал Dockerfile
 3. Создал docker-compose.yml
-4. Настроил гит. Нужен для установки synfony.    
+4. Настроил гит. Нужен для установки symfony.    
    `   git config --global user.name "Your Name" &&
    git config --global user.email "you@example.com"`
 5. Установил symfony  

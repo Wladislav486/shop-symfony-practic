@@ -40,17 +40,34 @@ _**Задача.**_
 3. Поменяем права и пользователя для директории assets
    `sudo chgrp wlad app/assets/`
    `sudo chmod 775 app/assets/`
-4. Устанавливаем зависимости
+4. Создаём и наполняем директорию `app/assets/css/section/` стилями для публичной и админ. части сайта
+5. Создаём `app/assets/section-main.js` в котором подключаем все css стили для публ. части сайта
+6. Устанавливаем зависимости
    `sudo npm install --save @fortawesome/fontawesome-free@5.15.3`
    `sudo npm install --save bootstrap@4.3.1`
    `sudo npm install --save-dev sass@1.32.0 sass-loader@10.1.1`
-5. Добавляем подключение зависимостей через js файл
+7. Добавляем подключение зависимостей через js файл
    `app/assets/section-main.js`
-6. Подключаем `app/assets/section-main.js` в `app/webpack.config.js`
+8. Подключаем `app/assets/section-main.js` в `app/webpack.config.js`
    Комментируем `.enableStimulusBridge('./assets/controllers.json')`  
    Добавляем `.enableSassLoader()`
-7. Компилируем стили
+9. Компилируем стили
    `sudo npm install`
-   `npm run dev`
-8. Подключаем все стили через section-main в хедере сайта
-   `encore_entry_link_tags('section-main')`
+   `sudo npm run dev`
+10. Подключаем все стили через section-main в хедере сайта
+    `encore_entry_link_tags('section-main')`
+
+### 100 Изображения
+
+**_Задача._**
+
+1. Настроить компиляцию изображений
+
+**_Решение._**
+
+1. Добавляем изображения в директорию `app/assets/images`
+2. В `app/webpack.config.js` настраиваем копирование файлов
+3. Устанавливаем зависимость для работы с файлами
+   `sudo yarn add file-loader@^6.0.0 --dev`
+4. Компилируем стили и изображения
+   `yarn run dev`

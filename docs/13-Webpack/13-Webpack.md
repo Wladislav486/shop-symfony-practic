@@ -71,3 +71,18 @@ _**Задача.**_
    `sudo yarn add file-loader@^6.0.0 --dev`
 4. Компилируем стили и изображения
    `yarn run dev`
+
+### 101 Javascript
+
+**_Задача._**
+
+1. Настроить компиляцию js файлов
+
+**_Решение._**
+
+1. Создаём директорию `app/assets/js/section/main` и `app/assets/js/section/main/utils`
+2. Добавляем скрипт `app/assets/js/section/main/utils/menu.js` - открывает меню для моб. версии сайта
+3. Подключаем js в `app/templates/main/base.html.twig`
+   `encore_entry_script_tags('section-main')`
+
+

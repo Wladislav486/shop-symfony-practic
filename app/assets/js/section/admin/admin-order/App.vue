@@ -8,6 +8,9 @@
 import {mapState} from "vuex";
 
 export default {
+  created() {
+    console.log(window.staticStore.orderProducts)
+  },
   computed: {
     ...mapState("products", ["testProperty"]),
     productsCount() {

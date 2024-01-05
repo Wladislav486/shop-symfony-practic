@@ -14,3 +14,11 @@ export function getUrlViewProduct(viewUrl, productId) {
         productId
     );
 }
+
+/**
+ * @param params
+ * @returns {string}
+ */
+export function concatUrlByParams(...params) {
+    return params.join('/');
+}

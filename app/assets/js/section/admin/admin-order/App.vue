@@ -13,14 +13,20 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 import OrderProductItem from "./components/OrderProductItem.vue";
 import OrderProductAdd from "./components/OrderProductAdd.vue";
 
 export default {
   components: {OrderProductAdd, OrderProductItem},
+  created() {
+    this.getCategories();
+  },
   computed: {
     ...mapState("products", ["staticStore"]),
+  },
+  methods: {
+    ...mapActions('products', ['getCategories'])
   }
 }
 </script>

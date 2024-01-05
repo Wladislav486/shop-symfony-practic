@@ -7,6 +7,13 @@
           class="form-control"
       >
         <option value="" disabled>- choose option -</option>
+        <option
+            v-for="category in categories"
+            :key="category.id"
+            :value="category.id"
+        >
+          {{ category.title }}
+        </option>
       </select>
     </div>
     <div class="col-md-3">
@@ -53,6 +60,8 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: 'OrderProductAdd',
   data() {
@@ -64,6 +73,9 @@ export default {
         pricePerOne: ''
       }
     };
+  },
+  computed: {
+    ...mapState('products', ['categories'])
   }
 }
 </script>

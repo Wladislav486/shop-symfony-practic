@@ -22,3 +22,24 @@ export function getUrlViewProduct(viewUrl, productId) {
 export function concatUrlByParams(...params) {
     return params.join('/');
 }
+
+/**
+ *
+ * @param defaultUrl
+ * @param categoryId
+ * @param page
+ * @param countLimit
+ * @returns {string}
+ */
+export function getUrlProductsByCategory(defaultUrl, categoryId, page, countLimit) {
+    return (
+        defaultUrl
+        + "?category=/api/categories/"
+        + categoryId
+        + "&isPublished=true"
+        + "&page="
+        + page
+        + "&itemsPerPage="
+        + countLimit
+    );
+}

@@ -57,6 +57,21 @@ const actions = {
         if (result.status === StatusCodes.NO_CONTENT) {
             console.log('deleted');
         }
+    },
+    async addNewOrderProduct({state, dispatch}) {
+        const url = state.staticStore.url.apiOrderProduct;
+        const data = {
+            pricePerOne: state.newOrderProduct.pricePerOne,
+            quantity: parseInt(state.newOrderProduct.quantity),
+            product: "/api/products/" + state.newOrderProduct.productId,
+            appOrder: "/api/orders/" + state.staticStore.orderId
+        };
+
+        const result = await axios.post(url, data, apiConfig);
+        if (result.data && result.status === StatusCodes.CREATED) {
+            // dispatch('getOrderProducts');
+            console.log('ADDED!!');
+        }
     }
 };
 

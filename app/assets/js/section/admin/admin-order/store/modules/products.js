@@ -5,6 +5,7 @@ import {apiConfig} from "../../../../../utils/settings";
 
 const state = () => ({
     categories: [],
+    categoryProducts: [],
     newOrderProduct: {
         categoryId: '',
         productId: '',
@@ -36,7 +37,10 @@ const actions = {
         );
 
         const result = await axios.get(url, apiConfig);
-        console.log(url, result)
+
+        if (result.data && result.status === StatusCodes.OK) {
+            commit('setCategoryProducts', result.data['hydra:member']);
+        }
     },
     async getCategories({commit, state}) {
         const url = state.staticStore.url.apiCategory;
@@ -65,6 +69,9 @@ const mutations = {
         state.newOrderProduct.productId = formData.productId;
         state.newOrderProduct.quantity = formData.quantity;
         state.newOrderProduct.pricePerOne = formData.pricePerOne;
+    },
+    setCategoryProducts(state, categoryProducts) {
+        state.categoryProducts = categoryProducts
     }
 };
 

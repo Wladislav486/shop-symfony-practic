@@ -56,33 +56,33 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"product:list", "product:item"})
+     * @Groups({"product:list", "product:item", "order:item"})
      * @ApiProperty(identifier=false)
      */
     private $id;
 
     /**
      * @ORM\Column(type="uuid")
-     * @Groups({"product:list", "product:item"})
+     * @Groups({"product:list", "product:item", "order:item"})
      * @ApiProperty(identifier=true)
      */
     private $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
      */
     private $quantity;
 
@@ -119,7 +119,7 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
      */
     private $category;
 

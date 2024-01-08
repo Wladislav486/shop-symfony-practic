@@ -27,7 +27,7 @@
         <option
             v-for="categoryProduct in categoryProducts"
             :key="categoryProduct.id"
-            :value="categoryProduct.id"
+            :value="categoryProduct.uuid"
         >
           {{ productTitle(categoryProduct) }}
         </option>
@@ -55,11 +55,13 @@
     <div class="col-md-3">
       <button
           class="btn btn-outline-info"
+          @click="viewDetails"
       >
         Details
       </button>
       <button
           class="btn btn-outline-success"
+          @click="submit"
       >
         Add
       </button>
@@ -70,6 +72,7 @@
 <script>
 import {mapActions, mapMutations, mapState} from "vuex";
 import {getProductInformativeTitle} from "../../../../utils/title-formatter";
+import {getUrlViewProduct} from "../../../../utils/url-generator";
 
 export default {
   name: 'OrderProductAdd',
@@ -84,17 +87,31 @@ export default {
     };
   },
   computed: {
-    ...mapState('products', ['categories', 'categoryProducts'])
+    ...mapState('products', ['categories', 'categoryProducts', 'staticStore'])
   },
   methods: {
     ...mapMutations('products', ['setNewProductInfo']),
-    ...mapActions('products', ['getProductsByCategory']),
+    ...mapActions('products', ['getProductsByCategory', 'addNewOrderProduct']),
     getProducts() {
       this.setNewProductInfo(this.form);
       this.getProductsByCategory()
     },
     productTitle(product) {
       return getProductInformativeTitle(product);
+    },
+    viewDetails(event) {
+      event.preventDefault();
+      const url = getUrlViewProduct(this.staticStore.url.viewProduct, this.form.productId);
+      window.open(url, '_blank').focus();
+    },
+    submit(event) {
+      event.preventDefault();
+      this.setNewProductInfo(this.form);
+      this.addNewOrderProduct();
+      this.resetFormData();
+    },
+    resetFormData() {
+      Object.assign(this.$data, this.$options.data.apply(this))
     }
   }
 }

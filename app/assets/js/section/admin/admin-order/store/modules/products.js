@@ -6,6 +6,7 @@ import {apiConfig} from "../../../../../utils/settings";
 const state = () => ({
     categories: [],
     categoryProducts: [],
+    orderProducts: [],
     newOrderProduct: {
         categoryId: '',
         productId: '',
@@ -14,12 +15,12 @@ const state = () => ({
     },
     staticStore: {
         orderId: window.staticStore.orderId,
-        orderProducts: window.staticStore.orderProducts,
         url: {
             viewProduct: window.staticStore.urlViewProduct,
             apiOrderProduct: window.staticStore.urlAPIOrderProduct,
             apiCategory: window.staticStore.urlAPICategory,
-            apiProduct: window.staticStore.urlAPIProduct
+            apiProduct: window.staticStore.urlAPIProduct,
+            apiOrder: window.staticStore.urlAPIOrder
         }
     },
     viewProductCountLimit: 25
@@ -28,6 +29,18 @@ const state = () => ({
 const getters = {};
 
 const actions = {
+    async getOrderProducts({commit, state}) {
+        const url = concatUrlByParams(
+            state.staticStore.url.apiOrder,
+            state.staticStore.orderId
+        );
+
+        const result = await axios.get(url, apiConfig);
+
+        if (result.data && result.status === StatusCodes.OK) {
+            commit('setOrderProducts', result.data.orderProducts);
+        }
+    },
     async getProductsByCategory({commit, state}) {
         const url = getUrlProductsByCategory(
             state.staticStore.url.apiProduct,
@@ -55,7 +68,7 @@ const actions = {
         const result = await axios.delete(url, apiConfig);
 
         if (result.status === StatusCodes.NO_CONTENT) {
-            console.log('deleted');
+            dispatch('getOrderProducts');
         }
     },
     async addNewOrderProduct({state, dispatch}) {
@@ -69,8 +82,7 @@ const actions = {
 
         const result = await axios.post(url, data, apiConfig);
         if (result.data && result.status === StatusCodes.CREATED) {
-            // dispatch('getOrderProducts');
-            console.log('ADDED!!');
+            dispatch('getOrderProducts');
         }
     }
 };
@@ -87,6 +99,9 @@ const mutations = {
     },
     setCategoryProducts(state, categoryProducts) {
         state.categoryProducts = categoryProducts
+    },
+    setOrderProducts(state, orderProducts) {
+        state.orderProducts = orderProducts;
     }
 };
 

@@ -7,6 +7,7 @@ const state = () => ({
     categories: [],
     categoryProducts: [],
     orderProducts: [],
+    busyProductsIds: [],
     newOrderProduct: {
         categoryId: '',
         productId: '',
@@ -26,7 +27,13 @@ const state = () => ({
     viewProductCountLimit: 25
 });
 
-const getters = {};
+const getters = {
+    freeCategoryProducts(state) {
+        return state.categoryProducts.filter(
+            item => state.busyProductsIds.indexOf(item.id) === -1
+        );
+    }
+};
 
 const actions = {
     async getOrderProducts({commit, state}) {
@@ -39,6 +46,7 @@ const actions = {
 
         if (result.data && result.status === StatusCodes.OK) {
             commit('setOrderProducts', result.data.orderProducts);
+            commit('setBusyProductsIds');
         }
     },
     async getProductsByCategory({commit, state}) {
@@ -102,6 +110,9 @@ const mutations = {
     },
     setOrderProducts(state, orderProducts) {
         state.orderProducts = orderProducts;
+    },
+    setBusyProductsIds(state) {
+        state.busyProductsIds = state.orderProducts.map(item => item.product.id);
     }
 };
 

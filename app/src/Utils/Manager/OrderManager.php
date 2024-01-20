@@ -47,10 +47,13 @@ class OrderManager extends AbstractBaseManager
         }
     }
 
-
+    /**
+     * @param Cart $cart
+     * @param User $user
+     * @return void
+     */
     public function createOrderFromCart(Cart $cart, User $user)
     {
-
         $order = new Order();
         $order->setOwner($user);
         $order->setStatus(OrderStaticStorage::ORDER_STATUS_CREATED);
@@ -79,6 +82,24 @@ class OrderManager extends AbstractBaseManager
         $this->entityManager->flush();
 
         $this->cartManager->remove($cart);
+    }
+
+    /**
+     * @param Order $order
+     * @return void
+     */
+    public function recalculateOrderTotalPrice(Order $order)
+    {
+        $orderTotalPrice = 0;
+
+        /**
+         * @var OrderProduct $orderProduct
+         */
+        foreach ($order->getOrderProducts()->getValues() as $orderProduct) {
+            $orderTotalPrice += $orderProduct->getQuantity() * $orderProduct->getPricePerOne();
+        }
+
+        $order->setTotalPrice($orderTotalPrice);
     }
 
     /**

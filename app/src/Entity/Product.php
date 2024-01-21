@@ -56,7 +56,7 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"product:list", "product:item", "order:item"})
+     * @Groups({"product:list", "product:item", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      * @ApiProperty(identifier=false)
      */
     private $id;
@@ -70,19 +70,19 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $quantity;
 
@@ -119,7 +119,7 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item"})
+     * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $category;
 

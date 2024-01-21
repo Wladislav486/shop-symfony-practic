@@ -23,7 +23,7 @@ const actions = {
             result.data
             && result.status === StatusCodes.OK
         ) {
-            commit('setCart', result.data["hydra:member"]);
+            commit('setCart', result.data["hydra:member"][0]);
         }
     },
 };

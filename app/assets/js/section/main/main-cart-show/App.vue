@@ -20,16 +20,21 @@
 <script>
 import CartProductList from "./components/CartProductList.vue";
 import CartTotalPrice from "./components/CartTotalPrice.vue";
+import {mapActions} from "vuex";
 
 export default {
   name: "App",
   components: {CartTotalPrice, CartProductList},
+  created() {
+    this.getCart()
+  },
   computed: {
     showCartContent() {
       return true;
     }
   },
   methods: {
+    ...mapActions('cart', ['getCart']),
     makeOrder() {
       return true;
     }

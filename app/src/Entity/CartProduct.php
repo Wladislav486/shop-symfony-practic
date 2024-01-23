@@ -24,7 +24,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "normalization_context"={"groups"="cart_product:item"}
  *          },
  *          "delete"={
- *
+ *          },
+ *          "patch"={
  *          }
  *      }
  * )

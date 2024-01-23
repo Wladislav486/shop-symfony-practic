@@ -56,14 +56,14 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"product:list", "product:item", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
+     * @Groups({"product:list", "product:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      * @ApiProperty(identifier=false)
      */
     private $id;
 
     /**
      * @ORM\Column(type="uuid")
-     * @Groups({"product:list", "product:item", "order:item"})
+     * @Groups({"product:list", "product:item", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      * @ApiProperty(identifier=true)
      */
     private $uuid;
@@ -108,6 +108,7 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity=ProductImage::class, mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     * @Groups({"cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $productImages;
 
